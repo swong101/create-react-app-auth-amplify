@@ -12,3 +12,13 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.Nav__nav___2Dx2Y {
+    position: fixed;
+    background: #fefefe;
+    width: 100%;
+}
+
+.Button__button___vS7Mv {
+    margin-right: 25px;
+}

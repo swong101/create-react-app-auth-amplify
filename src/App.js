@@ -4,13 +4,13 @@ import './App.css';
 import { withAuthenticator } from 'aws-amplify-react'
 import Amplify, { Auth } from 'aws-amplify';
 import aws_exports from './aws-exports';
-import videojs from 'video.js';
 import 'videojs-contrib-eme';
+import videojs from 'video.js';
 
 Amplify.configure(aws_exports);
 
 var licenseUri = 'https://license-global.pallycon.com/ri/licenseManager.do';
-var widevineToken = 'eyJrZXlfcm90YXRpb24iOmZhbHNlLCJyZXNwb25zZV9mb3JtYXQiOiJvcmlnaW5hbCIsInVzZXJfaWQiOiJzd29uZyIsImRybV90eXBlIjoid2lkZXZpbmUiLCJzaXRlX2lkIjoiS1o2ViIsImhhc2giOiJJNFFkeEhFRGpUSHFRNEVBTkdKXC9RWUQyXC9iY09ITFpPNHV3dU1SeG92WGM9IiwiY2lkIjoibWVkaWFjb252ZXJ0LXRlc3QtMSIsInBvbGljeSI6InI1QllKVXNMOFM2TUtnNWVYNFNHTkE9PSIsInRpbWVzdGFtcCI6IjIwMjEtMDMtMDFUMDU6MjY6MTdaIn0=';
+var widevineToken = 'eyJrZXlfcm90YXRpb24iOmZhbHNlLCJyZXNwb25zZV9mb3JtYXQiOiJvcmlnaW5hbCIsInVzZXJfaWQiOiJzd29uZyIsImRybV90eXBlIjoid2lkZXZpbmUiLCJzaXRlX2lkIjoiS1o2ViIsImhhc2giOiJRZXFYSUhZb0VOWXlENnJZUThJdkhOTmdDais0alc4MFhpaFRtQzNJbzRrPSIsImNpZCI6Im1lZGlhY29udmVydC10ZXN0LTEiLCJwb2xpY3kiOiJyNUJZSlVzTDhTNk1LZzVlWDRTR05BPT0iLCJ0aW1lc3RhbXAiOiIyMDIxLTAzLTAxVDE5OjE1OjEwWiJ9';
 const COMMON_WM_ID = '123';
 
 const getSessionUrl = async (user) => {
@@ -59,30 +59,35 @@ class App extends Component {
             msg: username
         };
         player.ready(function () {
-            player.eme();
-            player.trigger("watermarkSetData", parameter);
-            let playerConfig = {
-                src: dashUri,
-                type: 'application/dash+xml',
-                keySystems: {
-                    'com.widevine.alpha': {
-                        url: licenseUri,
-                        licenseHeaders: {
-                            'pallycon-customdata-v2': widevineToken
+            try {
+                player.eme();
+                player.trigger("watermarkSetData", parameter);
+                let playerConfig = {
+                    src: dashUri,
+                    type: 'application/dash+xml',
+                    keySystems: {
+                        'com.widevine.alpha': {
+                            url: licenseUri,
+                            licenseHeaders: {
+                                'pallycon-customdata-v2': widevineToken
+                            }
                         }
                     }
-                }
-            };
-            player.src(playerConfig);
+                };
+                player.src(playerConfig);
+            }
+            catch(err) {
+                console.log(err);
+            }
         });
     }
 
     render() {
         return (
             <div className="App">
-                <header className="App-header">
+                <div className="video">
                     <video id="my-player" className="video-js vjs-default-skin vjs-16-9" playsInline controls data-setup="{}"></video>
-                </header>
+                </div>
             </div>
         );
     }
