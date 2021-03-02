@@ -10,7 +10,7 @@ import videojs from 'video.js';
 Amplify.configure(aws_exports);
 
 var licenseUri = 'https://license-global.pallycon.com/ri/licenseManager.do';
-var widevineToken = 'eyJrZXlfcm90YXRpb24iOmZhbHNlLCJyZXNwb25zZV9mb3JtYXQiOiJvcmlnaW5hbCIsInVzZXJfaWQiOiJzd29uZyIsImRybV90eXBlIjoid2lkZXZpbmUiLCJzaXRlX2lkIjoiS1o2ViIsImhhc2giOiJLejNRUWd5RStGTWY4WUpncUMyZXhiNFdZSFBoOWhCN1FYak1KU3lMTTgwPSIsImNpZCI6Im1lZGlhY29udmVydC10ZXN0LTEiLCJwb2xpY3kiOiJyNUJZSlVzTDhTNk1LZzVlWDRTR05BPT0iLCJ0aW1lc3RhbXAiOiIyMDIxLTAzLTAxVDE5OjI2OjAxWiJ9';
+var widevineToken = '';
 const COMMON_WM_ID = '123';
 
 const getSessionUrl = async (user) => {
